@@ -2,13 +2,13 @@
 
 ## Project Overview
 
-This project implements a deterministic, seed-based password generator in C++. Given a user's first name, last name, service name, and a secret passphrase (six words), it produces a repeatable, high-entropy password comprising six dictionary words (capitalized), one special character, and one digit. Internally, inputs are concatenated, salted, and hashed with SHA-256 to derive a 64-bit seed, which initializes a C++ PRNG (`std::mt19937_64`). Selection of words, the special character, and digit is driven by this seeded RNG, guaranteeing identical output for identical inputs.
+This project implements a deterministic, seed-based password generator in C++. Given a user's first name, last name, service name, and a secret passphrase (six words), it produces a repeatable, high-entropy password comprising four dictionary words (capitalized), one special character, and one digit. Internally, inputs are concatenated, salted, and hashed with SHA-256 to derive a 64-bit seed, which initializes a C++ PRNG (`std::mt19937_64`). Selection of words, the special character, and digit is driven by this seeded RNG, guaranteeing identical output for identical inputs.
 
 ## Features
 
 * **Deterministic Generation:** Same inputs always yield the same password.
-* **Human-Friendly Words:** Six meaningful dictionary words instead of random gibberish.
-* **High Entropy:** Includes six words + one special character + one digit.
+* **Human-Friendly Words:** four meaningful dictionary words instead of random gibberish.
+* **High Entropy:** Includes four words + one special character + one digit.
 * **Modular Design:** Clear separation between hashing utilities and password logic.
 * **Salting & Secret Key:** Salted SHA-256 hash incorporates a user-supplied six-word secret key and a static salt.
 * **CLI Only:** Lightweight command-line interface with no GUI overhead.
@@ -25,20 +25,18 @@ This project implements a deterministic, seed-based password generator in C++. G
 3. Compile using:
 
    ```sh
-   g++ -std=c++17 -O2 \
-       main.cpp src/hash_util.cpp src/password_generator.cpp \
-       -o seedpass -lssl -lcrypto
+   g++ -std=c++17 -O2 main.cpp src/hash_util.cpp src/password_generator.cpp -o seedpass -lssl -lcrypto -Iinclude
    ```
 
 ## Usage
 
 ```sh
 $ ./seedpass
-Enter First Name: Alice
-Enter Last Name: Smith
+Enter First Name: John
+Enter Last Name: Doe
 Enter Service Name (e.g., twitter.com): twitter.com
-Enter Secret Key (6 words separated by space): alpha beta gamma delta epsilon zeta
-Generated Password: MapleCloudRocketBright!7
+Enter Secret Key (6 words separated by space): apple banana orange kiwi mango strawberry
+Generated Password: IntelligentPhasmatodeaWallsendUltracritical$9
 ```
 
 ## File Structure
