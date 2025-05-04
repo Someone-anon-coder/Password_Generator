@@ -23,7 +23,7 @@ void PasswordGenerator::loadWordlist(const std::string& path) {
     }
 
     if (words.size() < 100000)
-        throw std::runtime_error("Wordlist must contain a large number of entries");
+        throw std::runtime_error("Wordlist must contain a large number of entries (> 100000)");
 }
 
 std::string PasswordGenerator::capitalize(const std::string& word) {
@@ -52,7 +52,7 @@ std::string PasswordGenerator::generate(
     std::uniform_int_distribution<int> digitDist(0, 9); // Distribution for selecting digits
 
     std::ostringstream password; // Use ostringstream for efficient string concatenation
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 4; ++i) {
         std::string word = capitalize(words[wordDist(rng)]); // Capitalize the first letter of the word
         password << word;
     }
